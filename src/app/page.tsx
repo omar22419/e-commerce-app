@@ -1,34 +1,22 @@
-import { ProductType } from "./_interfaces/products";
+import CategoriesSlider from "./_Components/CategoriesSlider/CategoriesSlider";
+import HomeSlider from "./_Components/HomeSlider/HomeSlider";
+import ProductCard from "./_Components/ProductCard/ProductCard";
+import { getAllProducts } from "./_services/products.service";
+
 
 export default async function Home() {
 
 
-  async function getAllProducts():Promise<ProductType[]|null>{
-        try{
-            const res = await fetch('https://ecommerce.routemisr.com/api/v1/products',{
-              cache:'force-cache'
-            });
-            const finalRes = await res.json();
-            return finalRes.data;
-        }catch(error){
-            console.log('Erorr Found', error);
-            return null;
-        }
-    }
-
     const allProducts = await getAllProducts();
-    console.log(allProducts);
+    // console.log(allProducts);
 
   return (
     <>
-      <div>
-        {allProducts?.map((product) => 
-        <div key={product.id}>
-            <img src={product.imageCover} className="w-full" alt={product.title} />
-            <h2>{product.title}</h2>
-            <h5>Price:{product.price}</h5>
-        </div>
-      )}
+      <HomeSlider/>
+      <CategoriesSlider/>
+
+      <div className="grid grid-cols-4 gap-6 w-3/4 my-9 mx-auto">
+        {allProducts?.map(product => <ProductCard key={product.id} product={product}/>)}
       </div>
     </>
   );

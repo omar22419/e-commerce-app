@@ -11,6 +11,7 @@ export type ProductType={
     category: CategoryType;
     brand:BrandType;
     priceAfterDiscount?:number;
+    ratingsAverage:number;
 }
 
 export type CategoryType={
