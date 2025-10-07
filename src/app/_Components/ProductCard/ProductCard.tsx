@@ -8,7 +8,7 @@ export default function ProductCard({product}:ProductCardProps) {
       <Link href={`/productDetails/${product.id}`}>
       
       
-      <div className=" text-center bg-gray-900 rounded-3xl">
+      <div className=" text-center bg-gray-200 rounded-3xl">
         <img src={product.imageCover} className="w-full" alt={product.title} />
         <h2>{product.title.split(" ", 2).join(" ")}</h2>
         <h5>Price: {product.priceAfterDiscount?<>

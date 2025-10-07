@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 
-export default function MySwiper({imagesList, spaceBetween = 10, slidesPerView=1}:{imagesList:string[], slidesPerView?:number, spaceBetween?:number}) {
+export default function MySwiper({imagesList, spaceBetween = 10, slidesPerView=1,nameList}:{imagesList:string[], slidesPerView?:number, spaceBetween?:number,nameList?:string[]}) {
+
   return (
     <Swiper
       spaceBetween={spaceBetween}
@@ -17,8 +18,9 @@ export default function MySwiper({imagesList, spaceBetween = 10, slidesPerView=1
     >
 
 
-        {imagesList.map(src => <SwiperSlide key={src}>
+        {imagesList.map((src,index) => <SwiperSlide key={src}>
             <img src={src} alt='' className='w-full h-[400px]' />
+            <p className='text-center text-green-700 font-bold capitalize'>{nameList?.[index]}</p>
         </SwiperSlide>)}
 
       {/* <SwiperSlide>Slide 1</SwiperSlide>
