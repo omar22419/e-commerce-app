@@ -1,3 +1,4 @@
+import AddProductBtn from '_/app/_Components/AddProductBtn/AddProductBtn';
 import { getProductDetails } from '_/app/_services/products.service';
 import React from 'react'
 
@@ -5,27 +6,30 @@ import React from 'react'
 type ProductDetailsProps={
     params:{id:string}
 }
-export default async function ProductDetails({params}:ProductDetailsProps) {
+export default async function ProductDetails(props:ProductDetailsProps) {
 
-    const object = await getProductDetails(params.id);
+    const productDetails = await getProductDetails(props.params.id);
 
+    if(!productDetails){
+        return;
+    }
 
-    console.log('props',params.id);
   return (
     <div className='grid grid-cols-4 items-center px-10 py-5'>
         <div className='col-span-1'>
-            <img src={object?.imageCover} className='w-full' alt={object?.title} />
+            <img src={productDetails?.imageCover} className='w-full' alt={productDetails?.title} />
         </div>
 
         <div className="col-span-3 px-5">
-            <h1 className='font-bold text-5xl'>{object?.title}</h1>
-            <p className='text-gray-500 text-lg'>{object?.description}</p>
-            <h5>Price: {object?.priceAfterDiscount?<>
-                <span className='line-through  me-4'> {object?.priceAfterDiscount}</span>
-            </>:<span>{object?.price}</span>}
+            <h1 className='text-4xl text-center my-4'>{productDetails?.title}</h1>
+            <p className='text-gray-500 text-lg'>{productDetails?.description}</p>
+            <h5 className='font-bold my-1'>Price: {productDetails?.priceAfterDiscount?<>
+                <span className='line-through  me-4'> {productDetails?.price}</span>
+            </>:<span>{productDetails?.priceAfterDiscount}</span>}
             </h5>
-            <h5>Category: {object?.category.name}</h5>
-            <h5>Brand: {object?.brand.name}</h5>
+            <h5 className='font-bold my-1'>Quantity: {productDetails?.quantity}</h5>
+            <h5 className='font-bold my-1'>Rate: {productDetails?.ratingsAverage}</h5>
+            <AddProductBtn id={productDetails.id}/>
         </div>
     </div>
   )

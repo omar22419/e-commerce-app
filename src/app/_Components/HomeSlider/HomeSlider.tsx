@@ -16,7 +16,6 @@ export default function HomeSlider() {
         <div className="w-1/4">
             <Image src={blog1} className="w-full h-[200px]" alt="blog1" />
             <Image src={blog2} className="w-full h-[200px]" alt="blog2" />
-
         </div>
     </div>
   )

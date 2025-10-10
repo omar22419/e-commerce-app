@@ -10,7 +10,7 @@ export default async function CategoriesSlider() {
   return (
     <div className="m-4">
       <MySwiper
-        slidesPerView={8}
+        slidesPerView={4}
         spaceBetween={20}
         imagesList={allCategories?.map((category) => category.image)}
         nameList={allCategories?.map((category) => category.slug)}

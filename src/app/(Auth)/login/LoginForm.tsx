@@ -29,8 +29,8 @@ export default function LoginForm() {
 
   async function mySubmit(data: LoginFormType) {
     // const resOutput = await handleLogin(data);
-    const res = await signIn('credentials',{...data, redirect:true});
-    console.log(res);
+    const res = await signIn('credentials',{...data, redirect:false});
+    console.log("rest",res);
     if(res?.ok){
         toast.success("Welcome back", {
           position: "top-right",
@@ -80,7 +80,7 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-        <Button>Login</Button>
+        <Button className="cursor-pointer">Login</Button>
       </form>
     </Form>
   );

@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./_Components/Navbar/Navbar";
 import Footer from "./_Components/Footer/Footer";
-import '@fortawesome/fontawesome-free/css/all.min.css'
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Toaster } from "_/components/ui/sonner";
-
+import MySessionProvider from "./_Components/MySessionProvider/MySessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +32,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar/>
-        {children}
-        <Toaster />
-        <Footer/>
+          <MySessionProvider>
+            <Navbar />
+            <div className="bg-[url('../assets/images/light-patten.svg')] my-5">
+              {children}
+            </div>
+            <Toaster />
+            <Footer />
+          </MySessionProvider>
       </body>
     </html>
   );
