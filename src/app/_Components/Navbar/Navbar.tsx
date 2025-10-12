@@ -1,16 +1,24 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import logo from "@images/freshcart-logo.svg";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
+import { getUserCart } from "_/app/_services/cart.service";
+import { CartContext } from "_/app/context/CartContext";
 
 export default function Navbar() {
   const { data: isAuthenticated } = useSession();
-  // console.log('session',session);
+  const [initialCartCount, setCartCount]=useState(0);
+  // const [cartCount, setCartCount] = useState(0)
+  const {cartCount} = useContext(CartContext)
 
-
+  useEffect(function(){
+    getUserCart().then(res=>{
+      setCartCount(res.numOfCartItems);
+    });
+  },[])
 
   function handleLogout(){
     signOut({redirect:true, callbackUrl:'/login'})
@@ -94,7 +102,7 @@ export default function Navbar() {
                     href="/cart"
                     className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   >
-                    Cart
+                    Cart {cartCount || initialCartCount}
                   </Link>
                 </li>
                 <li>

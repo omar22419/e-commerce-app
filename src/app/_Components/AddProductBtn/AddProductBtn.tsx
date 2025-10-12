@@ -1,14 +1,17 @@
 'use client'
 import { addProductToCart } from '_/app/cart/cart.actions';
+import { CartContext } from '_/app/context/CartContext';
 import { Button } from '_/components/ui/button'
-import React from 'react'
+import React, { useContext } from 'react'
 import { toast } from 'sonner';
 
 export default function AddProductBtn({id}:{id:string}) {
+    const {updateCartCount}= useContext(CartContext);
     async function handleAddToCart(){
         const isAddedSuccess= await addProductToCart(id);
         if(isAddedSuccess){
-            toast.success("Producted Added Successfull y",{position:'top-right'})
+            toast.success("Producted Added Successfull y",{position:'top-right'});
+            updateCartCount(isAddedSuccess);
         }else{
             toast.error('Error occurred while Adding',{position:'top-right'});
         }
