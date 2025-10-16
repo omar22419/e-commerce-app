@@ -14,6 +14,8 @@ import { CartResponseType, ItemType } from "../_interfaces/items.type";
 import { getUserCart } from "../_services/cart.service";
 import RemoveItemBtn from "./RemoveItemBtn";
 import ChangeCountBtn from "./ChangeCountBtn";
+import RemoveAllItemsBtn from "./RemoveAllItemsBtn";
+import Link from "next/link";
 
 export default async function CartPage() {
   async function getUserCartt(): Promise<CartResponseType> {
@@ -21,7 +23,6 @@ export default async function CartPage() {
     return res;
   }
   const { numOfCartItems, products, totalCartPrice } = await getUserCartt();
-  console.log("products", products);
   return (
     <>
       <div className="w-3/4 mx-auto">
@@ -37,9 +38,9 @@ export default async function CartPage() {
             </TableRow>
           </TableHeader>
 
+          <TableBody >
           {products.map((product: ItemType) => (
-            <>
-              <TableBody>
+            <>            
                 <TableRow key={product._id}>
                   <TableCell className="font-medium">
                     <div className="flex">
@@ -65,22 +66,24 @@ export default async function CartPage() {
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell>{product.price} L.E</TableCell>
+                  <TableCell>{product.price} $</TableCell>
                   <TableCell>
-                    <div className="flex justify-center gap-1">
-                      <ChangeCountBtn isIncrement id={product.product.id} newCount={product.count + 1}/>
-                      <Input value={product.count} className="p-2 w-8 h-8" />
-                      <ChangeCountBtn id={product.product.id} newCount={product.count - 1 }/>
+                    <div className="flex flex-col gap-1">
+                      <div className="flex justify-center gap-1">
+                        <ChangeCountBtn isIncrement id={product.product.id} newCount={product.count + 1}/>
+                        <Input value={product.count} className="p-2 w-8 h-8" />
+                        <ChangeCountBtn id={product.product.id} newCount={product.count - 1 }/>
+                      </div>
+                      <RemoveItemBtn id={product.product.id}/>
                     </div>
-                    <RemoveItemBtn id={product.product.id}/>
                   </TableCell>
                   <TableCell className="text-right">
                     ${product.price * product.count}
                   </TableCell>
                 </TableRow>
-              </TableBody>
             </>
           ))}
+          </TableBody>
         </Table>
         <div className="flex flex-col items-end ">
           <h2 className="font-black">
@@ -91,10 +94,12 @@ export default async function CartPage() {
             <span className="font-bold">{numOfCartItems}</span>
           </h2>
           <div className="flex gap-3">
-            <Button className="cursor-pointer bg-green-600 hover:bg-green-800">
-              Pay
-            </Button>
-            <Button variant={"destructive"}>Remove All</Button>
+            <Link href={'/cart/payment'}>
+              <Button className="cursor-pointer bg-green-600 hover:bg-green-800">
+                Pay
+              </Button>
+            </Link>
+            <RemoveAllItemsBtn/>
           </div>
         </div>
       </div>

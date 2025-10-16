@@ -33,12 +33,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
           <MySessionProvider>
-            <Navbar />
-            <div className="bg-[url('../assets/images/light-patten.svg')] my-5">
-              {children}
+            <div className="flex flex-col">
+              <Navbar />
+              <div className="bg-[url('../assets/images/light-patten.svg')] my-5">
+                {children}
+              </div>
+              <Toaster />
+              <Footer />
             </div>
-            <Toaster />
-            <Footer />
           </MySessionProvider>
       </body>
     </html>

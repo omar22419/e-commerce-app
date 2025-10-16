@@ -11,5 +11,5 @@ export default async function middleware(req:NextRequest) {
 }
 
 export const config ={
-    matcher:['/cart']
+    matcher:['/cart:path*']
 }

@@ -63,3 +63,22 @@ export async function changeCount(id:string,count:number){
         return null;
     }
 }
+
+export async function deleteUserCart(){
+  const token = await getMyUserToken();
+  const res = await fetch(`https://ecommerce.routemisr.com/api/v1/cart`,{
+    method:'Delete',
+    headers:{
+      token: token as string
+    }
+  });
+  const finalRes = await res.json();
+  console.log('delete',finalRes);
+  if(finalRes.message=='success'){
+    revalidatePath('/cart');
+    return true;
+  }
+  else{
+    return finalRes.status;
+  }
+}

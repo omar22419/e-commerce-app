@@ -1,6 +1,6 @@
 'use server'
 import { getMyUserToken } from "_/utils/utils";
-import { CartResponseType, ItemType } from "../_interfaces/items.type";
+import { CartResponseType} from "../_interfaces/items.type";
 
 
 export async function getUserCart():Promise<CartResponseType>{
@@ -19,8 +19,8 @@ export async function getUserCart():Promise<CartResponseType>{
     const final = await res.json();
     const {
       numOfCartItems,
-      data: { products, totalCartPrice },
+      cartId,data: { products, totalCartPrice },
     } = final;
 
-    return { numOfCartItems, products, totalCartPrice };
+    return { numOfCartItems, products, totalCartPrice, cartId };
 }
