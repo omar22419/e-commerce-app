@@ -12,7 +12,7 @@ export default function Navbar() {
   const { data: isAuthenticated } = useSession();
   const [initialCartCount, setCartCount]=useState(0);
   // const [cartCount, setCartCount] = useState(0)
-  const {cartCount} = useContext(CartContext)
+  const {cartCount} = useContext(CartContext);
 
   useEffect(function(){
     getUserCart().then(res=>{

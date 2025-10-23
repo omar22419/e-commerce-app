@@ -99,7 +99,7 @@ export default async function CartPage() {
                 Pay
               </Button>
             </Link>
-            <RemoveAllItemsBtn/>
+            <RemoveAllItemsBtn numberOfItems={numOfCartItems}/>
           </div>
         </div>
       </div>
