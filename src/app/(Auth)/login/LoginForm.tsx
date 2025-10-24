@@ -14,13 +14,10 @@ import { Input } from "_/components/ui/input";
 import { useForm } from "react-hook-form";
 import { schema } from "./login.schema";
 import { LoginFormType } from "./login.types";
-import { handleLogin } from "./login.actions";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 export default function LoginForm() {
-  const router = useRouter();
 
   const RhfObj = useForm({
     resolver: zodResolver(schema),

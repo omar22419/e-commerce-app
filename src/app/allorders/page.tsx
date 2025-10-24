@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "_/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "_/components/ui/table";
 import { getMyOrders } from "./allorders.actions"
 import { OrderType } from "../_interfaces/order.types";
 
