@@ -3,12 +3,14 @@ import { getProductDetails } from '_/app/_services/products.service';
 import React from 'react'
 
 
-type ProductDetailsProps={
-    params:{id:string}
+type ProductDetails={
+    params:{
+        id:string
+    }
 }
-export default async function ProductDetails(props:ProductDetailsProps) {
+export default async function ProductDetails(details:ProductDetails) {
 
-    const productDetails = await getProductDetails(props.params.id);
+    const productDetails = await getProductDetails(details.params.id);
 
     if(!productDetails){
         return;
